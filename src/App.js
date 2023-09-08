@@ -2,6 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import axios from "axios";
 import { startOfWeek, endOfWeek, format, subMonths } from "date-fns";
+import ProfileCard from "./ProfileCard";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -79,8 +80,17 @@ function App() {
 
   const weekOptions = generateWeekOptions();
 
+  // Check if the user's commits meet the criteria
+  const meetsCriteria = commitData.length >= 10;
+
   return (
     <div className="App">
+      <ProfileCard
+        username={username}
+        selectedWeek={selectedWeek}
+        commits={commitData.length} // Pass the actual number of commits
+      />
+
       <h1>GitHub Commit Data for a Specific Week</h1>
       <div>
         <label htmlFor="username">Enter GitHub Username:</label>
@@ -111,19 +121,28 @@ function App() {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <ul>
-          {commitData.map((commit, index) => (
-            <li key={index}>
-              <strong>
-                {format(
-                  new Date(commit.commit.author.date),
-                  "MMM dd, yyyy HH:mm:ss"
-                )}
-              </strong>
-              : {commit.commit.message}
-            </li>
-          ))}
-        </ul>
+        <>
+          {meetsCriteria ? (
+            <p>Commits meet the criteria (at least 10 commits per week).</p>
+          ) : (
+            <p>
+              Commits do not meet the criteria (less than 10 commits per week).
+            </p>
+          )}
+          <ul>
+            {commitData.map((commit, index) => (
+              <li key={index}>
+                <strong>
+                  {format(
+                    new Date(commit.commit.author.date),
+                    "MMM dd, yyyy HH:mm:ss"
+                  )}
+                </strong>
+                : {commit.commit.message}
+              </li>
+            ))}
+          </ul>
+        </>
       )}
     </div>
   );
