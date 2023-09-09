@@ -56,3 +56,26 @@ ul li strong {
 ul li p {
   margin: 0;
 }
+
+.profile-progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.progress {
+  height: 20px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background-color: #007bff; /* Change the color to your preference */
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  width: 0;
+  transition: width 0.3s ease-in-out;
+}

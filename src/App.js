@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { startOfWeek, endOfWeek, format, subMonths } from "date-fns";
 import ProfileCard from "./ProfileCard";
+import ProfileProgressBar from "./ProfileProgressBar";
 
 function App() {
   const [username, setUsername] = useState("");
@@ -85,11 +86,18 @@ function App() {
 
   return (
     <div className="App">
-      <ProfileCard
-        username={username}
-        selectedWeek={selectedWeek}
-        commits={commitData.length} // Pass the actual number of commits
-      />
+      <div className="profile-container">
+        <ProfileCard
+          username={username}
+          selectedWeek={selectedWeek}
+          commits={commitData.length} // Pass the actual number of commits
+        />
+        <ProfileProgressBar
+          username={username}
+          selectedWeek={selectedWeek}
+          commits={commitData.length} // Pass the actual number of commits
+        />
+      </div>
 
       <h1>GitHub Commit Data for a Specific Week</h1>
       <div>
