@@ -9,6 +9,7 @@ const ProfileProgressBar = ({ username, selectedWeek, commits }) => {
     <div className="profile-progress-bar">
       <h2>{username}'s Profile</h2>
       <p>Selected Week: {selectedWeek}</p>
+
       <div className="progress">
         <div
           className="progress-bar"
