@@ -4,12 +4,14 @@ import axios from "axios";
 import { startOfWeek, endOfWeek, format, subMonths } from "date-fns";
 import ProfileCard from "./ProfileCard";
 import ProfileProgressBar from "./ProfileProgressBar";
+import GaugeChart from "./GaugeChart";
 
 function App() {
   const [username, setUsername] = useState("");
   const [selectedWeek, setSelectedWeek] = useState("");
   const [commitData, setCommitData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [gaugeValue, setGaugeValue] = useState(0);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -97,6 +99,15 @@ function App() {
           selectedWeek={selectedWeek}
           commits={commitData.length} // Pass the actual number of commits
         />
+        <div className="gauge-chart">
+          <GaugeChart
+            id="gauge-chart"
+            nrOfLevels={10}
+            colors={["#FF0000", "#FFA500", "#008000"]}
+            arcWidth={0.4}
+            percent={gaugeValue}
+          />
+        </div>
       </div>
 
       <h1>GitHub Commit Data for a Specific Week</h1>
